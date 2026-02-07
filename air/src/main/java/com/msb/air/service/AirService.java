@@ -1,6 +1,7 @@
 package com.msb.air.service;
 
 import com.github.pagehelper.PageInfo;
+import com.msb.air.entity.Air;
 import com.msb.air.entity.District;
 import com.msb.air.form.AirAddForm;
 import jakarta.validation.Valid;
@@ -29,4 +30,10 @@ public interface AirService {
      * @param airAddForm
      */
     void add(@Valid AirAddForm airAddForm);
+
+    /**
+     * 修改空气质量信息
+     * @param air
+     */
+    void updateById(Air air);
 }

@@ -60,4 +60,15 @@ public class AirServiceImpl implements AirService {
             throw new RuntimeException("【添加空气质量】 添加失败！！");
         }
     }
+
+    @Override
+    public void updateById(Air air) {
+        //1、修改数据
+        int count = airMapper.updateById(air);
+        //2、不成功，扔异常
+        if(count != 1){
+            System.out.println("【修改空气质量】 修改失败！！");
+            throw new RuntimeException("【添加空气质量】 添加失败！！");
+        }
+    }
 }

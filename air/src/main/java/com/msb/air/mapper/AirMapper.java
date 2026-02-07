@@ -3,6 +3,7 @@ package com.msb.air.mapper;
 import com.msb.air.entity.Air;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -15,4 +16,8 @@ public interface AirMapper {
     // 这里要注意前面是数据库列名，后面是java映射的属性名
     @Insert("insert into air (district_id,monitor_time,pm10,pm25,monitoring_station) values (#{districtId},#{monitorTime},#{pm10},#{pm25},#{monitoringStation})")
     int insert(Air air);
+
+    // 修改数据
+    @Update("update air set district_id = #{districtId},monitor_time = #{monitorTime},pm10 = #{pm10},pm25 = #{pm25},monitoring_station = #{monitoringStation} where id = #{id}")
+    int updateById(Air air);
 }

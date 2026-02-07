@@ -2,16 +2,20 @@ package com.msb.air.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 public class Air {
 
     private Integer id;
-    @JsonIgnore //在传数据的时候，这个字段就不会传过去
+    //@JsonIgnore //在传数据的时候，这个字段就不会传过去
     private Integer districtId;
     // 是在responbody下才会对时间格式进行转换，toString是无效的
     @JsonFormat(pattern = "yyyy-MM-dd")
+    // 将前端传入的字符串类型日期，
+    // 自动转换为后端 Java 的日期类型（如 Date、LocalDate 等）
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date monitorTime;
     private Integer pm10;
     private Integer pm25;

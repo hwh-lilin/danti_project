@@ -1,6 +1,7 @@
 package com.msb.air.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.msb.air.entity.Air;
 import com.msb.air.entity.District;
 import com.msb.air.form.AirAddForm;
 import com.msb.air.service.AirService;
@@ -99,6 +100,52 @@ public class AirController {
         airService.add(airAddForm);
 
         //3、添加成功
+        return R.ok();
+    }
+
+    /**
+     * # 修改空气质量信息
+     * # 请求方式&路径
+     * POST	http://localhost:8080/air/update
+     *
+     * # 请求参数
+     * id = Integer   （必传项）
+     * districtId = Integer   （非必传）
+     * monitorTime = yyyy-MM-dd  （非必传）
+     * pm10 = Integer  （非必传）
+     * pm25 = Integer  （非必传）
+     * monitoringStation = String  （非必传）
+     *
+     * # 业务流程
+     * 1、接收参数
+     * 2、做参数的非空校验
+     * 3、修改指定id的数据
+     *
+     * # 响应数据
+     * 成功响应：
+     * {
+     *   "code": 0,
+     *   "msg": ""
+     * }
+     * 失败响应：
+     * {
+     *   "code": 错误编码,
+     *   "msg": "错误信息"
+     * }
+     */
+    @PostMapping("/air/update")
+    public ResultVO airUpdate(Air air){
+        //1、做参数的非空校验
+        Integer id = air.getId();
+        if(id == null){
+            // 传入的id是必须要填的
+            return R.error(400,"参数不合法！");
+        }
+
+        //2、找Service修改数据
+        airService.updateById(air);
+
+        //3、返回
         return R.ok();
     }
 }

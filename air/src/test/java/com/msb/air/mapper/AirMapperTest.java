@@ -34,6 +34,22 @@ public class AirMapperTest {
         System.out.println(count);
     }
 
+    @Test
+    @Transactional
+    void contextLoad3(){
+        Air air = new Air();
+        air.setId(2);
+        air.setDistrictId(1);
+        air.setMonitorTime(new Date());
+        air.setPm10(10);
+        air.setPm25(25);
+        air.setMonitoringStation("北京监测站！！！");
+        int count = airMapper.updateById(air);
+        System.out.println(count);
+    }
+
+
+
     @BeforeEach
     public void before(){
         System.out.println("分页&条件查询空气质量信息mapper测试开始");

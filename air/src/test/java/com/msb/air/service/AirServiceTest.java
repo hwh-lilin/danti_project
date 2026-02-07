@@ -1,5 +1,6 @@
 package com.msb.air.service;
 
+import com.msb.air.entity.Air;
 import com.msb.air.form.AirAddForm;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,6 +30,18 @@ public class AirServiceTest {
         air.setPm25(25);
         air.setMonitoringStation("长沙监测站！！！!!");
         airService.add(air);
+    }
+
+    @Test
+    void contextLoads3(){
+        Air air = new Air();
+        air.setId(3);
+        air.setDistrictId(3);
+        air.setMonitorTime(new Date());
+        air.setPm10(13);
+        air.setPm25(30);
+        air.setMonitoringStation("杭州监测站！！！");
+        airService.updateById(air);
     }
 
     @BeforeEach
