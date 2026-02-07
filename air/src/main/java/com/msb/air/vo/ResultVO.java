@@ -1,11 +1,25 @@
 package com.msb.air.vo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 public class ResultVO {
     private Integer code;
 
     private String msg;
 
+    // 分页查询的时候加上的  这个是没有分页查询时，total是空的，传数据就不显示total
+    @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
+    private Long total;
+
     private Object data;
+
+    public Long getTotal() {
+        return total;
+    }
+
+    public void setTotal(Long total) {
+        this.total = total;
+    }
 
     public Integer getCode() {
         return code;
@@ -36,6 +50,7 @@ public class ResultVO {
         return "ResultVO{" +
                 "code=" + code +
                 ", msg='" + msg + '\'' +
+                ", total=" + total +
                 ", data=" + data +
                 '}';
     }

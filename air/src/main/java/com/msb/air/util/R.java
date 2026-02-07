@@ -17,4 +17,11 @@ public class R {
         vo.setData(data);
         return vo;
     }
+
+    // 分页查询的时候加上的total
+    public static ResultVO ok(Long total,Object data){
+        ResultVO vo = ok(data);
+        vo.setTotal(total);
+        return vo;
+    }
 }
