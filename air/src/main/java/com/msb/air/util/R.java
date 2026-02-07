@@ -24,4 +24,22 @@ public class R {
         vo.setTotal(total);
         return vo;
     }
+
+    /**
+     * 添加遇到的参数错误报错方法编写
+     * 失败响应：
+     * {
+     *   "code": 错误编码,
+     *   "msg": "错误信息"
+     * }
+     * @param code
+     * @param message
+     * @return
+     */
+    public static ResultVO error(Integer code,String message){
+        ResultVO vo = new ResultVO();
+        vo.setCode(code);
+        vo.setMsg(message);
+        return vo;
+    }
 }

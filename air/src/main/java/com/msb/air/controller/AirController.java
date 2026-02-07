@@ -2,11 +2,15 @@ package com.msb.air.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.msb.air.entity.District;
+import com.msb.air.form.AirAddForm;
 import com.msb.air.service.AirService;
 import com.msb.air.util.R;
 import com.msb.air.vo.ResultVO;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -60,5 +64,41 @@ public class AirController {
 
         return R.ok(pageInfo.getTotal(),pageInfo.getList());
 
+    }
+
+
+    /**
+     * # 添加空气质量信息
+     * # 请求方式&路径
+     * POST http://localhost:8080/air/add
+     *
+     * # 请求参数 正常为了解耦，可以单独声明一个AirAddForm专门去接收。
+     * # 请求参数
+     * districtId = Integer (必传项)
+     * monitorTime = yyyy-MM-dd  (必传项)
+     * pm10 = Integer   (必传项)
+     * pm25 = Integer   (必传项
+     * monitoringStation = String (必传项)
+     *
+     * # 业务流程
+     * 1、接收参数
+     * 2、做参数的非空校验
+     * 3、数据扔到数据库
+     */
+    @PostMapping("/air/add")
+    public ResultVO airAdd(@Valid AirAddForm airAddForm //@Valid：触发AirAddForm对象中的检验注解（@NotNull/@NotBlank等）生效
+                            ,BindingResult result){ //BindingResult：存储@Valid校验后的结果，必须紧跟在@Valid注解的参数后面
+        //1、查看参数是否合法
+        if(result.hasErrors()){
+            // 有参数不满足要求
+            String message = result.getFieldError().getDefaultMessage();
+            // 返回参数不合法信息
+            return R.error(400,message);
+        }
+        //2、调用Service层添加数据
+        airService.add(airAddForm);
+
+        //3、添加成功
+        return R.ok();
     }
 }

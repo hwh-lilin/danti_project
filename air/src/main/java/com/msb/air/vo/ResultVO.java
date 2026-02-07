@@ -11,6 +11,8 @@ public class ResultVO {
     @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
     private Long total;
 
+    //在数据添加的时候，data是空的
+    @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
     private Object data;
 
     public Long getTotal() {
